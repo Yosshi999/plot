@@ -62,6 +62,25 @@ function draw() {
     ctx.fillStyle = "black";
     ctx.strokeStyle = "black";
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.beginPath();
+    ctx.arc(Z1x, Z1y, 1, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(WIDTH/2,HEIGHT/2);
+    ctx.lineTo(Z1x, Z1y);
+    ctx.stroke();
+    ctx.fillText("Z1", Z1x, Z1y);
+
+    ctx.beginPath();
+    ctx.arc(Z2x, Z2y, 1, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(WIDTH/2,HEIGHT/2);
+    ctx.lineTo(Z2x, Z2y);
+    ctx.stroke();
+    ctx.fillText("Z2", Z2x, Z2y);
+
     fs = [math.add(Z1, Z2)];
     for (let i=0; i<1000; i+=1) {
         f = fs[fs.length - 1];
