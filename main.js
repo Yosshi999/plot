@@ -88,7 +88,7 @@ function draw() {
         fs.push(fn);
     }
     ctx.beginPath();
-    const [x, y] = to_coord(fs[0]);
+    let [x, y] = to_coord(fs[0]);
     ctx.moveTo(x, y);
     for (let i=1; i<fs.length; i+=1) {
         const [x, y] = to_coord(fs[i]);
@@ -99,12 +99,33 @@ function draw() {
         ctx.beginPath();
         const [x, y] = to_coord(fs[i]);
         ctx.arc(x, y, 3, 0, Math.PI*2);
-        if (i==0) ctx.stroke();
+        if (i==0) {
+            ctx.stroke();
+            ctx.fillText("f(1)", x, y);
+        }
         else ctx.fill();
     }
     ctx.textAlign = "left";
     ctx.textBaseline = "top";
     ctx.fillText("f(1000)=" + fs[fs.length-1], 0, 0, 200);
+
+    const fudotenP = math.multiply(0.5, math.add(Z1, math.multiply(math.sqrt(Z1), math.sqrt(math.add(Z1, math.multiply(Z2, 4))))));
+    const fudotenN = math.multiply(0.5, math.subtract(Z1, math.multiply(math.sqrt(Z1), math.sqrt(math.add(Z1, math.multiply(Z2, 4))))));
+    ctx.fillStyle = "red";
+    ctx.beginPath();
+    let [xP, yP] = to_coord(fudotenP);
+    ctx.arc(xP, yP, 3, 0, Math.PI*2);
+    ctx.fill();
+    ctx.fillText("fixpoint(pos)", xP, yP);
+
+    ctx.fillStyle = "blue";
+    ctx.beginPath();
+    let [xN, yN] = to_coord(fudotenN);
+    ctx.arc(xN, yN, 3, 0, Math.PI*2);
+    ctx.fill();
+    ctx.fillText("fixpoint(neg)", xN, yN);
+
+    ctx.fillStyle = "black";
     window.requestAnimationFrame(draw);
 }
 draw();
